@@ -1,6 +1,2 @@
 ---
 # handlers file for set_proxy_server
-- name: Перезапустить nginx
-  ansible.builtin.service:
-    name: nginx
-    state: restarted
