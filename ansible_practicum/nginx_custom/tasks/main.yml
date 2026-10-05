@@ -3,5 +3,5 @@
 - name: Подмена веб-страницы
   ansible.builtin.template:
     src: index.j2
-    dest: /var/www/html/index.my.html
+    dest: /var/www/html/index.html
   notify: "Nginx Reloader"
