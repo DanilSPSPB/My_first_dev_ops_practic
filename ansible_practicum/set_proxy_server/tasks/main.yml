@@ -1,0 +1,37 @@
+---
+# tasks file for set_proxy_server
+---
+
+- name: Сгенерировать конфиг балансировщика
+  ansible.builtin.template:
+    src: loadbalancer.conf.j2
+    dest: "{{ nginx_lb_config_path }}"
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Проверить конфиг nginx
+    - Перезапустить nginx
+
+- name: Включить конфиг
+  ansible.builtin.file:
+    src: "{{ nginx_lb_config_path }}"
+    dest: "{{ nginx_lb_enabled_path }}"
+    state: link
+  notify:
+    - Проверить конфиг nginx
+    - Перезапустить nginx
+
+- name: Удалить дефолтный сайт nginx
+  ansible.builtin.file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify:
+    - Проверить конфиг nginx
+    - Перезапустить nginx
+
+- name: Убедиться, что nginx запущен и в автозапуске
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true

@@ -1,0 +1,5 @@
+---
+# handlers file for firewall
+- name: Перезагрузить UFW
+  community.general.ufw:
+    state: reloaded

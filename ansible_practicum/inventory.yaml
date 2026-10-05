@@ -1,0 +1,24 @@
+---
+all:
+  vars:
+    ansible_user: ubuntu
+    ansible_ssh_privat_key: /home/dborohtyanov/.ssh/id_ed25519
+    connection_protocol: ssh
+    ansible_become: true
+    ansible_become_user: root
+    ansible_become_method: sudo
+    ansible_ssh_common_args: >-
+      -o ProxyJump=ubuntu@89.169.140.159
+      -o StrictHostKeyChecking=accept-new
+  children:
+    web_servers:
+      hosts:
+        vm_1:
+          ansible_host: 192.168.10.7
+        vm_2:
+          ansible_host: 192.168.10.18
+    proxy_server:
+      hosts:
+        vm_1_proxy:
+          ansible_host: 89.169.140.159
+          ansible_ssh_common_args: -o StrictHostKeyChecking=accept-new

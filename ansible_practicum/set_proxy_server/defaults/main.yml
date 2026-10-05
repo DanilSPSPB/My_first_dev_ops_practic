@@ -1,0 +1,16 @@
+---
+# defaults file for set_proxy_server
+# Порт, на котором слушает балансировщик
+nginx_lb_listen_port: 80
+
+# Порт на backend-серверах
+nginx_lb_backend_port: 80
+
+# Метод балансировки: round-robin
+nginx_lb_method: ""
+
+# Путь к файлу конфига на целевом хосте
+nginx_lb_config_path: /etc/nginx/sites-available/loadbalancer.conf
+
+# Путь к симлинку в sites-enabled
+nginx_lb_enabled_path: /etc/nginx/sites-enabled/loadbalancer.conf1~

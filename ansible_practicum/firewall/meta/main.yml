@@ -1,0 +1,10 @@
+---
+galaxy_info:
+  author: DanilB
+  description: UFW — SSH с одного IP, HTTP в обе стороны
+  license: MIT
+  min_ansible_version: "2.14"
+
+dependencies: []
+collections:
+  - community.general

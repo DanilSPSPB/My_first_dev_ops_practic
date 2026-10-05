@@ -1,0 +1,11 @@
+---
+# tasks file for install_nginx
+- name: Установка nginx
+  ansible.builtin.apt:
+    name: nginx
+    state: present
+- name: Добавить nginx в автозапуск и запустить
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true

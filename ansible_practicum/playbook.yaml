@@ -1,0 +1,35 @@
+---
+- name: Установка стандартных пакетов
+  hosts: all
+  roles:
+    - role: default_packages
+  tags:
+    - install_packages
+
+- name: Установка nginx
+  hosts: all
+  roles:
+    - role: install_nginx
+  tags:
+    - install_nginx
+
+- name: Настройка фаервола на сервере-прокси
+  hosts: proxy_server
+  roles:
+    - role: firewall
+  tags:
+    - firewall_custom
+
+- name: Установка и настройка nginx c кастомной страницей
+  hosts: web_servers
+  roles:
+    - role: nginx_custom
+  tags:
+    - nginx_custom
+
+- name: Настройка nginx-банасировщика
+  hosts: proxy_server
+  roles:
+    - role: set_proxy_server
+  tags:
+     - set_proxy_server
