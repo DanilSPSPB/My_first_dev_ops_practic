@@ -3,6 +3,7 @@ upstream backend {
     server {{ hostvars[host]['ansible_host'] }}:{{ nginx_lb_backend_port }};
 {% endfor %}
 }
+}
 
 server {
     listen {{ nginx_lb_listen_port }};
