@@ -4,4 +4,10 @@
   ansible.builtin.copy:
     src: index.html
     dest: /var/www/html/index.html
-  notify: "Nginx Reloader"
+  register: nginx_page
+
+- name: Перезагрузить nginx
+  ansible.builtin.service:
+    name: nginx
+    state: reloaded
+  when: nginx_page.changed
