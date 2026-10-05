@@ -13,4 +13,4 @@ nginx_lb_method: ""
 nginx_lb_config_path: /etc/nginx/sites-available/loadbalancer.conf
 
 # Путь к симлинку в sites-enabled
-nginx_lb_enabled_path: /etc/nginx/sites-enabled/loadbalancer.conf1~
+nginx_lb_enabled_path: /etc/nginx/sites-enabled/loadbalancer.conf
