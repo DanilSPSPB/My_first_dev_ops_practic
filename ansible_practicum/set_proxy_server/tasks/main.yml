@@ -7,21 +7,35 @@
     owner: root
     group: root
     mode: '0644'
+  register: lb_config
 
 - name: Включить конфиг
   ansible.builtin.file:
     src: "{{ nginx_lb_config_path }}"
     dest: "{{ nginx_lb_enabled_path }}"
     state: link
+  register: lb_link
 
 - name: Удалить дефолтный сайт nginx
   ansible.builtin.file:
     path: /etc/nginx/sites-enabled/default
     state: absent
-  notify: Перезапустить nginx
+  register: lb_default
+
+- name: Проверить конфиг nginx
+  ansible.builtin.command: nginx -t
+  changed_when: false
+  when: lb_config.changed or lb_link.changed or lb_default.changed
+
+- name: Перезагрузить nginx
+  ansible.builtin.service:
+    name: nginx
+    state: reloaded
+  when: lb_config.changed or lb_link.changed or lb_default.changed
 
 - name: Убедиться, что nginx запущен и в автозапуске
   ansible.builtin.service:
     name: nginx
     state: started
     enabled: true
+
