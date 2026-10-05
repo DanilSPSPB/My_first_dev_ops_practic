@@ -32,3 +32,8 @@ variable "vm_with_public_ip" {
   type        = string
   description = "Ключ ВМ, которой нужен публичный статический ip"
 }
+
+variable "folder_id" {
+  type       = string
+  default    =  "b1g1n6otae7nsefs4auq"
+}

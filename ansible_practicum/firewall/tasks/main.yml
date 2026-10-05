@@ -6,6 +6,7 @@
     port: "22"
     proto: tcp
     from_ip: "{{ firewall_ssh_allowed_from }}"
+    direction: out
 
 - name: Разрешить HTTP на вход
   community.general.ufw:
