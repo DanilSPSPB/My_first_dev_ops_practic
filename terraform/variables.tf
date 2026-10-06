@@ -19,7 +19,7 @@ variable "zone" {
 variable "ssh_public_key_path" {
   type        = string
   description = "Путь к публичному SSH-ключу"
-  default     = "/home/dborohtyanov/.ssh/id_ed25519.pub"
+  default     = "/путь/к/ключу"
 }
 
 variable "template" {
