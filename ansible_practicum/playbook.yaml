@@ -13,13 +13,6 @@
   tags:
     - install_nginx
 
-- name: Настройка фаервола на сервере-прокси
-  hosts: proxy_server
-  roles:
-    - role: firewall
-  tags:
-    - firewall_custom
-
 - name: Установка и настройка nginx c кастомной страницей
   hosts: web_servers
   roles:
