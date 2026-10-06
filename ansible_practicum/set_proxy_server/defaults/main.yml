@@ -4,7 +4,7 @@
 nginx_lb_listen_port: 80
 
 # Порт на backend-серверах
-nginx_lb_backend_port: 80
+nginx_lb_backend_port: 3000
 
 # Метод балансировки: round-robin
 nginx_lb_method: ""
