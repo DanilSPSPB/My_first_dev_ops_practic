@@ -32,7 +32,7 @@
 - name: Проверить конфиг nginx
   ansible.builtin.command: nginx -t
   changed_when: false
-  when: nginx_conf.changed
+  when: nginx_conf.changed or nginx_site_link.changed
 
 - name: Перезагрузить nginx
   ansible.builtin.service:
