@@ -5,7 +5,7 @@
     rule: allow
     port: "22"
     proto: tcp
-    from_ip: "{{ hostvars['vm_1_proxy']['ansible_host'] }}"
+    from_ip: "{{ ip_remote_vm }}"
 
 - name: Разрешить HTTP на вход
   community.general.ufw:
@@ -21,7 +21,7 @@
     proto: tcp
     direction: out
 
-- name: Разрешить исходящие по умолчанию (для ProxyJump)
+- name: Разрешить исходящие по умолчанию
   community.general.ufw:
     direction: outgoing
     default: allow
