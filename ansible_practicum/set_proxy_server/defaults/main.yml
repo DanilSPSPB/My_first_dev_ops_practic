@@ -1,10 +1,10 @@
 ---
 # defaults file for set_proxy_server
 # Порт, на котором слушает балансировщик
-nginx_lb_listen_port: 80
+nginx_lb_listen_port: 3000
 
 # Порт на backend-серверах
-nginx_lb_backend_port: 3000
+nginx_lb_backend_port: 80
 
 # Метод балансировки: round-robin
 nginx_lb_method: ""
