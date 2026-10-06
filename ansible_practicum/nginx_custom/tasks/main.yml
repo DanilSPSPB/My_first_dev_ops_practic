@@ -9,11 +9,19 @@
 - name: Положить свой конфиг сайта с нужным портом
   ansible.builtin.template:
     src: nginx_site.conf.j2
-    dest: /etc/nginx/conf.d/my_site.conf
+    dest: /etc/nginx/sites-available/my_site.conf
     owner: root
     group: root
     mode: "0644"
   register: nginx_conf
+
+- name: Создать симлинк в sites-enabled
+  ansible.builtin.file:
+    src: /etc/nginx/sites-available/my_site.conf
+    dest: /etc/nginx/sites-enabled/my_site.conf
+    state: link
+    force: true
+  register: nginx_site_link
 
 - name: Подмена веб-страницы
   ansible.builtin.copy:
@@ -30,4 +38,4 @@
   ansible.builtin.service:
     name: nginx
     state: reloaded
-  when: nginx_conf.changed or nginx_default.changed or nginx_web_site.changed
+  when: nginx_conf.changed or nginx_default.changed or nginx_web_site.changed or nginx_site_link.changed
