@@ -1,13 +1,33 @@
 ---
 # tasks file for nginx_custom
+- name: Удалить дефолтный сайт в sites-enabled
+  ansible.builtin.file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  register: nginx_default
+
+- name: Положить свой конфиг сайта с нужным портом
+  ansible.builtin.template:
+    src: nginx_site.conf.j2
+    dest: /etc/nginx/conf.d/my_site.conf
+    owner: root
+    group: root
+    mode: "0644"
+  register: nginx_conf
+
 - name: Подмена веб-страницы
   ansible.builtin.copy:
     src: index.html
     dest: /var/www/html/index.html
-  register: nginx_page
+  register: nginx_web_site
+
+- name: Проверить конфиг nginx
+  ansible.builtin.command: nginx -t
+  changed_when: false
+  when: nginx_conf.changed
 
 - name: Перезагрузить nginx
   ansible.builtin.service:
     name: nginx
     state: reloaded
-  when: nginx_page.changed
+  when: nginx_conf.changed or nginx_default.changed or nginx_web_site.changed
