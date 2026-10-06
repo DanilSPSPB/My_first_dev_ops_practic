@@ -35,5 +35,5 @@ variable "vm_with_public_ip" {
 
 variable "folder_id" {
   type       = string
-  default    =  "b1g1n6otae7nsefs4auq"
+  default    =  "id_папки_в облаке"
 }
